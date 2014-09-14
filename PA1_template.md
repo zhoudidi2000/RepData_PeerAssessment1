@@ -1,10 +1,7 @@
----
-title: 'Reproducible Research: Peer Assessment 1'
-output:
-  html_document:
-    keep_md: yes
----
+
+Reproducible Research: Peer Assessment 1
 ===
+
 This report will be described in multiple parts. For detailed requirements please look at README.md.
 
 ### Loading and preprocessing the data
@@ -96,16 +93,16 @@ max_data <- steps_ave[steps_ave$steps == max(steps_ave$steps),]
 
 ```r
 my_na <- is.na(act)
-sum(my_na)
+paste("The total number of missing values is:", sum(my_na))
 ```
 
 ```
-## [1] 2304
+## [1] "The total number of missing values is: 2304"
 ```
 
 - Devise a strategy for filling in all of the missing values in the dataset. The strategy does not need to be sophisticated. For example, you could use the mean/median for that day, or the mean for that 5-minute interval, etc.
 
-There are some days with all NAs, so replace `NA` with the mean for that 5-minute interval.
+    There are some days with all NAs, so replace `NA` with the mean for that 5-minute interval.
 
 - Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
@@ -124,7 +121,7 @@ new_act$steps<-Na_clean$values
 new_steps_total <- sapply(split(new_act, new_act$date), function(x) sum(x$steps))
 par(mar=c(5,4,4,1))
 hist(new_steps_total, 
-     main ="Histogram of Total Steps Taken Each Day(W/ NAs)",
+     main ="Histogram of Total Steps Taken Each Day",
      xlab ="Total Steps Taken Each Day" )
 ```
 
@@ -150,8 +147,8 @@ paste("Median of total steps taken per day is:", median(new_steps_total))
 
 - Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
-Mean value didn't change as imputation used the average on 5-mi interval.
-Median value is a little bit bigger than the first part, because the frequency of the total steps taken each day slightly increased by imputation.
+    Mean value didn't change as imputation used the average on 5-mi interval.
+    Median value is a little bit bigger than the first part, because the frequency of the total steps taken each day slightly increased by imputation.
 
 ### Are there differences in activity patterns between weekdays and weekends?
 - Create a new factor variable in the dataset with two levels ¨C ¡°weekday¡± and ¡°weekend¡± indicating whether a given date is a weekday or weekend day
@@ -170,6 +167,18 @@ new_act$week<-gsub(pattern="(Monday|Tuesday|Wednesday|Thursday|Friday)",
                replacement="weekday", new_act$week)
 new_act$week<-gsub(pattern="(Saturday|Sunday)",
                replacement="weekend", new_act$week)
+head(new_act, n=7)
+```
+
+```
+##    steps       date interval    week
+## 1  1.717 2012-10-01        0 weekday
+## 2  0.000 2012-10-02        0 weekday
+## 3  0.000 2012-10-03        0 weekday
+## 4 47.000 2012-10-04        0 weekday
+## 5  0.000 2012-10-05        0 weekday
+## 6  0.000 2012-10-06        0 weekend
+## 7  0.000 2012-10-07        0 weekend
 ```
 
 - Make a panel plot containing a time series plot (i.e. `type = "l"`) of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis). 
