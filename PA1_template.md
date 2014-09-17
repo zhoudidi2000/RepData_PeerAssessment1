@@ -86,7 +86,11 @@ plot(steps_ave$interval, steps_ave$steps, type="l", xlab="5-minute interval",
 
 ```r
 max_data <- steps_ave[steps_ave$steps == max(steps_ave$steps),]
-print(max_data)
+paste(max_data$interval,"interval contains the maximum number of steps")
+```
+
+```
+## [1] "835 interval contains the maximum number of steps"
 ```
 
 ### Imputing missing values
@@ -152,7 +156,7 @@ paste("Median of total steps taken per day is:", median(new_steps_total))
     Median value is a little bit bigger than the first part, because the frequency of the total steps taken each day slightly increased by imputation.
 
 ### Are there differences in activity patterns between weekdays and weekends?
-- Create a new factor variable in the dataset with two levels Â¨C Â¡Â°weekdayÂ¡Â± and Â¡Â°weekendÂ¡Â± indicating whether a given date is a weekday or weekend day
+- Create a new factor variable in the dataset with two levels ¨C ¡°weekday¡± and ¡°weekend¡± indicating whether a given date is a weekday or weekend day
 
 ```r
 Sys.setlocale("LC_ALL", "English")

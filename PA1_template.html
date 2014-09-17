@@ -282,6 +282,10 @@ plot(steps_ave$interval, steps_ave$steps, type=&quot;l&quot;, xlab=&quot;5-minut
 </ul>
 
 <pre><code class="r">max_data &lt;- steps_ave[steps_ave$steps == max(steps_ave$steps),]
+paste(max_data$interval,&quot;interval contains the maximum number of steps&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;835 interval contains the maximum number of steps&quot;
 </code></pre>
 
 <h3>Imputing missing values</h3>
